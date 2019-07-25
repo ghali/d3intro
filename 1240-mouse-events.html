@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        svg { background-color: #ccc; }
+    </style>
+</head>
+<body>
+    <svg id="mysvg" width="600" height="400">
+        <circle id="mycircle" cx="300" cy="200" r="100" fill="red" />
+    </svg>
+
+    <script>
+        var mysvg = document.getElementById("mysvg");
+
+        var mycircle = mysvg.getElementById("mycircle");
+
+        mycircle.onmousedown = function() {
+            mycircle.setAttribute("fill", "blue");
+        }
+    </script>
+</body>

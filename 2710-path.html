@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        svg { background-color: #ccc; }
+        circle.dot { fill: blue; }
+        path.line { fill: none; stroke: cyan; stroke-width: 2px; }
+    </style>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        function get_random() {
+            return d3.range(10)
+                     .map(() => Math.floor(10 * Math.random()));
+        }
+
+        var dim = {'w': 200, 'h': 180,
+                   margin: {'left': 20, 'right': 20,
+                            'top': 20, 'bottom': 20}};
+        var svg = d3.select('body')
+                    .append('svg')
+                    .attr('width', dim.w + dim.margin.left + dim.margin.right)
+                    .attr('height', dim.h + dim.margin.top + dim.margin.top);
+
+        var x_scale = d3.scaleLinear()
+                        .domain([0, 10])
+                        .range([0, dim.w]);
+        var y_scale = d3.scaleLinear()
+                        .domain([0, 10])
+                        .range([0, dim.h]);
+
+        var line = d3.line()
+                     .x((d, i) => x_scale(i))
+                     .y(d => y_scale(d));
+
+        var g = svg.append('g')
+                   .attr('transform',
+                         'translate(' +
+                         dim.margin.left + ',' +
+                         dim.margin.top + ')');
+
+        function init() {
+            var data = get_random();
+            g.append('path')
+             .datum(data)
+             .attr('class', 'line')
+             .attr('d', line);
+
+            g.selectAll('circle')
+             .data(data)
+             .enter()
+             .append('circle')
+             .attr('class', 'dot')
+             .attr('cx', (d, i) => x_scale(i))
+             .attr('cy', d => y_scale(d))
+             .attr('r', 5);
+        }
+
+        function update() {
+            data = get_random();
+            g.select('.line')
+             .datum(data)
+             .transition()
+             .duration(1000)
+             .attr('d', line);
+
+            g.selectAll('.dot')
+             .data(data)
+             .transition()
+             .duration(1000)
+             .attr('cy', d => y_scale(d))
+             .on("end", update);
+        }
+        init();
+        update();
+    </script>
+</body>

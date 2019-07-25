@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        svg { background-color: #ccc; }
+        circle { fill: blue; }
+    </style>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        function get_random() {
+            return d3.range(10)
+                     .map(() => Math.floor(10 * Math.random()));
+        }
+
+        var svg = d3.select('body')
+                    .append('svg')
+                    .attr('width', '240')
+                    .attr('height', '180');
+
+        function init() {
+            var circles = svg.selectAll('circle')
+                             .data(get_random())
+                             .enter()
+                             .append('circle')
+                             .attr('cx', (d, i) => (20 + i * 20))
+                             .attr('cy', (d) => (20 + d * 15))
+                             .attr('r', 5);
+            return circles;
+        }
+
+        function update(circles) {
+            circles.data(get_random())
+                   .transition()
+                   .duration(500)
+                   .attr('cy', (d) => (20 + d * 15));
+        }
+
+        var circles = init();
+        setInterval(() => update(circles), 600);
+    </script>
+</body>

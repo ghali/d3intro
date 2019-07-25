@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head><style>span { font-size: 300%; }</style></head>
+<body>
+    <div id="spans_div"></div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        function random_int() {
+            return Math.floor(10 * Math.random());
+        }
+
+        var random_data = d3.range(10)
+                            .map(() => random_int());
+
+        d3.select('#spans_div')
+          .selectAll('span')
+          .data(random_data)
+          .enter()
+          .append('span')
+          .text(d => d + ' ');
+    </script>
+</body>

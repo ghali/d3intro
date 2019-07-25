@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head><style>svg { background-color: #ddd; }</style></head>
+<body>
+    <div class="container"></div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        var svg = d3.select('.container')
+                    .append('svg')
+                    .attr('width', 200)
+                    .attr('height', 900)
+                    .attr('viewbox', '0 0 200 800');
+
+        var yscale = d3.scaleLinear()
+                       .domain([10, 20])
+                       .range([0, 800]);
+
+        var yaxis_left = d3.axisLeft()
+                           .scale(yscale);
+
+        svg.append('g')
+           .attr("transform", "translate(20,10)")
+           .call(yaxis_left);
+
+        var yaxis_right = d3.axisRight()
+                          .scale(yscale);
+        
+        d3.select('svg')
+          .append('g')
+          .attr("transform", "translate(120,10)")
+          .call(yaxis_right);
+    </script>
+</body>

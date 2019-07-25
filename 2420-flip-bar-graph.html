@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        svg {
+            background-color: #ddd;
+            margin: 20px;
+        }
+        div { width: 160px; }
+    </style>
+</head>
+<body>
+    <div id="chart"></div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        function get_random_int() {
+            return Math.floor(10 * Math.random());
+        }
+
+        var w = 150, h = 100;
+        var svg = d3.select('#chart')
+                    .append('svg')
+                    .attr('viewBox', '0 0 ' + w + ' ' + h);
+
+        var random_data = d3.range(10)
+                            .map(() => get_random_int());
+
+        svg.selectAll('rect')
+           .data(random_data)
+           .enter()
+           .append('rect')
+           .attr('x', (d, i) => i * 15)
+           .attr('y', (d) => (h - d * 10))
+           .attr('width', 10)
+           .attr('height', (d) => d * 10);
+
+        random_data = d3.range(10)
+                        .map(() => get_random_int());
+
+        svg.selectAll('rect')
+           .data(random_data)
+           .transition()
+           .duration(1000)
+           .attr('x', (d, i) => i * 15)
+           .attr('y', (d) => (h - d * 10))
+           .attr('width', 10)
+           .attr('height', (d) => d * 10);
+    </script>
+</body>

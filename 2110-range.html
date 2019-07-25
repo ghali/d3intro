@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<head><style>span { font-size: 300%; }</style></head>
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        var body = document.getElementsByTagName('body')[0];
+
+        var data = d3.range(10);
+        data.forEach(datum => body.innerHTML += "<span>" + datum + " </span>");
+    </script>
+</body>

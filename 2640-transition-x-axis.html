@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<head><style>svg { background-color: #ddd; }</style></head>
+<body>
+    <div class="container"></div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        var svg = d3.select('.container')
+                    .append('svg')
+                    .attr('width', 1340)
+                    .attr('height', 200)
+                    .attr('viewbox', '0 0 1280 200');
+
+        function get_x_axis(domain) {
+            var xscale = d3.scaleLinear()
+                           .domain(domain)
+                           .range([0, 1280]);
+            var xaxis_bottom = d3.axisBottom()
+                                 .scale(xscale);
+            return xaxis_bottom;
+        }
+
+        function init() {
+            var xaxis_bottom = get_x_axis([10, 20]);
+            var axis = svg.append('g')
+                          .attr("transform", "translate(10,110)")
+                          .call(xaxis_bottom);
+            return axis;
+        }
+        var axis = init();
+
+        function update() {
+            var b = 100 * Math.random();
+            var e = b + 100 * Math.random();
+            var xaxis_bottom = get_x_axis([b, e]);
+            axis.transition()
+                .duration(2500)
+                .call(xaxis_bottom)
+                .on("end", update);
+        }
+        update();
+    </script>
+</body>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .container { width: 640px; }
+        svg {
+            background-color: #ddd;
+            margin: 20px;
+        }
+        .red { fill: red; }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        var svg = d3.select('.container')
+                    .append('svg')
+                    .attr('viewBox', '-5 -5 210 160');
+
+        function circle(cx, cy, r) {
+            svg.append('circle')
+               .attr('cx', cx)
+               .attr('cy', cy)
+               .attr('r', r)
+               .attr('class', 'red');
+        }
+        circle(100, 75, 50);
+        circle(0, 0, 5);
+        circle(200, 150, 5);
+    </script>
+</body>
