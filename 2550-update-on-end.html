@@ -9,9 +9,25 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script>
         const w = 960, h = 720;
-        function get_random() {
-            return d3.range(10)
-                     .map(() => Math.floor(10 * Math.random()));
+        function random_data(num) {
+            return function() {
+                return d3.range(num)
+                         .map(() => Math.floor(10 * Math.random()));
+            }
+        }
+
+        var get_random = random_data(10);
+
+        function update() {
+            svg.selectAll('circle')
+               .data(get_random())
+               .transition()
+               .delay((d, i) => (i * 50))
+               .duration(1000)
+               .attr('cx', (d, i) => (w/50 + i * (w/12)))
+               .attr('cy', (d) => (h/36 + d * (h/10)))
+               .attr('r', 5)
+               .on("end", update);
         }
 
         var svg = d3.select('body')
@@ -26,18 +42,6 @@
            .attr('cx', (d, i) => (w/50 + i * (w/12)))
            .attr('cy', (d) => (h/36 + d * (h/10)))
            .attr('r', 5);
-
-        function update() {
-            svg.selectAll('circle')
-               .data(get_random())
-               .transition()
-               .delay((d, i) => (i * 50))
-               .duration(1000)
-               .attr('cx', (d, i) => (w/50 + i * (w/12)))
-               .attr('cy', (d) => (h/36 + d * (h/10)))
-               .attr('r', 5)
-               .on("end", update);
-        }
 
         update();
     </script>

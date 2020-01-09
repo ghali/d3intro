@@ -4,14 +4,14 @@
     <div id="spans_div"></div>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script>
-        function get_random_int() {
-            return Math.floor(10 * Math.random());
+        function random_data(num) {
+            return function() {
+                return d3.range(num)
+                         .map(() => Math.floor(10 * Math.random()));
+            }
         }
 
-        function get_random() {
-            return d3.range(1 + get_random_int())
-                     .map(() => get_random_int());
-        }
+        var get_random = random_data(10);
 
         function print() {
             var spans = d3.select('#spans_div')

@@ -8,15 +8,14 @@
 <body>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script>
-        function get_random() {
-            return d3.range(10)
-                     .map(() => Math.floor(10 * Math.random()));
+        function random_data(num) {
+            return function() {
+                return d3.range(num)
+                         .map(() => Math.floor(10 * Math.random()));
+            }
         }
 
-        var svg = d3.select('body')
-                    .append('svg')
-                    .attr('width', '240')
-                    .attr('height', '180');
+        var get_random = random_data(10);
 
         function init() {
             var circles = svg.selectAll('circle')
@@ -36,6 +35,10 @@
                    .attr('cy', (d) => (20 + d * 15));
         }
 
+        var svg = d3.select('body')
+                    .append('svg')
+                    .attr('width', '240')
+                    .attr('height', '180');
         var circles = init();
         setInterval(() => update(circles), 600);
     </script>

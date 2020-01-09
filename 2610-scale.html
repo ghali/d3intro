@@ -5,15 +5,15 @@
     <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
     <script src="/usr/local/d3/d3.v5.js"></script>
     <script>
-        var xscale = d3.scaleLinear();
-        var b = xscale.domain([10, 20]);
-        var c = b.range([0, 640]);
+        var xscale = d3.scaleLinear()
+                       .domain([10, 20])
+                       .range([0, 640]);
 
         d3.select('#x')
           .selectAll('span')
           .data(d3.range(11).map(d => (d + 10)))
           .enter()
           .append('span')
-          .html(d => d + ' --> ' + c(d) + '<br />');
+          .html(d => d + ' --> ' + xscale(d) + '<br />');
     </script>
 </body>
