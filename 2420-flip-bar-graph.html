@@ -12,6 +12,11 @@
     <div id="chart"></div>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script>
+        if (typeof d3 === 'undefined') {
+            document.write('<script src="/usr/local/d3/d3.v5.min.js"><\/script>');
+        }
+    </script>
+    <script>
         function random_data(num) {
             return function() {
                 return d3.range(num)

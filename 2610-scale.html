@@ -2,8 +2,12 @@
 <head><style>* { font-size: 120%; }</style></head>
 <body>
     <span id="x"></span>
-    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
-    <script src="/usr/local/d3/d3.v5.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        if (typeof d3 === 'undefined') {
+            document.write('<script src="/usr/local/d3/d3.v5.min.js"><\/script>');
+        }
+    </script>
     <script>
         var xscale = d3.scaleLinear()
                        .domain([10, 20])

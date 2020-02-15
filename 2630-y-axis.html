@@ -4,6 +4,11 @@
     <div class="container"></div>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script>
+        if (typeof d3 === 'undefined') {
+            document.write('<script src="/usr/local/d3/d3.v5.min.js"><\/script>');
+        }
+    </script>
+    <script>
         var svg = d3.select('.container')
                     .append('svg')
                     .attr('width', 200)
